@@ -9,16 +9,16 @@ module.exports = {
 
       const users = await UserService.getAll();
 
-      // Asynchronous create user
-      UserService.createOne();
-
       const params = {
         MessageBody: 'New user!',
         QueueUrl: process.env.QUEUE_USER_NOTIFICATIONS_URL,
         DelaySeconds: 0
       };
 
-      await sqs.sendMessage(params).promise();
+
+      // Asynchronous create user
+      UserService.createOne();
+      sqs.sendMessage(params).promise();
 
       return res.send({
         body,

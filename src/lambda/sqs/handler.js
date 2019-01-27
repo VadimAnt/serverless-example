@@ -4,7 +4,7 @@ const sqs = new AWS.SQS();
 module.exports = {
   async compute (event, context, callback) {
     const { Records } = event;
-
+    console.log(Records);
     await Promise.all(Records.map((record) => {
       console.log(record.ReceiptHandle);
       sqs.deleteMessage({

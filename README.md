@@ -1,3 +1,3 @@
-Create file env.dev.sh
-Enter in AWS credential in env.dev.sh
-Run npm run deploy:dev
+Create file env.dev.sh<br/>
+Enter in AWS credential in env.dev.sh<br/>
+Run npm run deploy:dev<br/>

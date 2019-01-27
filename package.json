@@ -4,7 +4,7 @@
   "description": "",
   "main": "handler.js",
   "scripts": {
-    "start:dev": "sh ./bin/start.dev.sh"
+    "deploy:dev": "sh ./bin/start.dev.sh"
   },
   "keywords": [],
   "author": "",

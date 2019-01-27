@@ -3,7 +3,7 @@ const AWS = require('aws-sdk');
 const sqs = new AWS.SQS();
 
 module.exports = {
-  async index(req, res) {
+  async index(req, res, next) {
     try {
       const { body, query } = req;
 
@@ -25,8 +25,8 @@ module.exports = {
         query,
         users,
       });
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      return next(error);
     }
   }
 };

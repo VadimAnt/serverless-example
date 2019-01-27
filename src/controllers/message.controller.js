@@ -4,7 +4,7 @@ const MessageService = require('../services/message.service');
 const UserService = require('../services/user.service');
 
 module.exports = {
-  async index(req, res) {
+  async index(req, res, next) {
     try {
       const { body } = req;
 
@@ -23,8 +23,8 @@ module.exports = {
         messages,
       });
 
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      return next(error);
     }
   }
 };

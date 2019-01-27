@@ -1,0 +1,27 @@
+{
+  "name": "testAws",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "start:dev": "sh ./bin/start.dev.sh"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "serverless-dynamodb-local": "^0.2.30",
+    "serverless-offline": "^4.2.0",
+    "serverless-offline-sqs": "^1.6.0"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.395.0",
+    "body-parser": "^1.18.3",
+    "dynamoose": "^1.5.0",
+    "express": "^4.16.4",
+    "faker": "^4.1.0",
+    "serverless-http": "^1.9.0",
+    "serverless-plugin-offline-dynamodb-stream": "^1.0.18",
+    "uuid": "^3.3.2"
+  }
+}

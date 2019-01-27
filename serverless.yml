@@ -1,0 +1,55 @@
+service: aws-nodejs
+
+plugins:
+  - serverless-offline-sqs
+  - serverless-dynamodb-local
+  - serverless-offline
+  - serverless-plugin-offline-dynamodb-stream
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: dev
+  region: ${env:AWS_REGION}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - dynamodb:DescribeStream
+        - dynamodb:GetRecords
+        - dynamodb:GetShardIterator
+        - dynamodb:ListStreams
+      Resource: arn:aws:dynamodb:${env:AWS_REGION}:${env:AWS_ACCOUNT_ID}:*/*
+    - Effect: Allow
+      Action:
+        - sqs:*
+      Resource: arn:aws:sqs:${env:AWS_REGION}:${env:AWS_ACCOUNT_ID}:*
+  environment:
+    QUEUE_USER_NOTIFICATIONS_URL: ${env:QUEUE_USER_NOTIFICATIONS_URL}
+
+functions:
+  app:
+    handler: src/app.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
+  DbStreamMessage:
+    handler: src/lambda/dbStreams/handler.compute
+    events:
+      - stream: ${env:DB_STREAM_MESSAGE_ARN}
+  UserNotifications:
+    handler: src/lambda/sqs/handler.compute
+    events:
+      - sqs: ${env:SQS_QUEUE_USER_NOTIFICATIONS_ARN}
+
+resources:
+  Resources:
+    usersTable: ${file(./resources/dynamodb/user.yml)}
+    messageTable: ${file(./resources/dynamodb/message.yml)}
+    UserNotifications: ${file(./resources/sqs/userNotifications.yml)}

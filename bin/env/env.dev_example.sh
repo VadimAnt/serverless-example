@@ -3,8 +3,8 @@ export PORT=3000
 
 export AWS_ACCESS_KEY_ID=
 export AWS_SECRET_ACCESS_KEY=
-export AWS_REGION=us-east-1
-export AWS_ACCOUNT_ID=494631470431
+export AWS_REGION=
+export AWS_ACCOUNT_ID=
 
 export DB_STREAM_MESSAGE_ARN=
 
